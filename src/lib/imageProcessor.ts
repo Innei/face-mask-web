@@ -94,7 +94,7 @@ export class ImageProcessor {
     }
 
     // 获取处理后的图片
-    return canvas.toDataURL('image/png', 0.9)
+    return canvas.toDataURL('image/jpeg', 1)
   }
 
   // 调整图片大小以优化性能

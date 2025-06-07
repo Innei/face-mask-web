@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from 'jotai'
-import { useCallback } from 'react'
+import { memo, useCallback } from 'react'
 import { toast } from 'sonner'
 import twemoji from 'twemoji'
 
@@ -174,18 +174,14 @@ export const EmojiSection = () => {
 
         <div className="grid grid-cols-8 sm:grid-cols-12 md:grid-cols-16 gap-2 mb-4">
           {getAvailableEmojis().map((emoji) => (
-            <button
-              type="button"
+            <EmojiItem
+              emoji={emoji}
+              isSelected={selectedEmojis.includes(emoji)}
+              toggleEmoji={toggleEmoji}
               key={emoji}
-              onClick={() => toggleEmoji(emoji)}
-              className={`text-2xl size-16 flex items-center justify-center rounded-lg border-2 transition-colors ${
-                selectedEmojis.includes(emoji)
-                  ? 'border-accent bg-accent/10'
-                  : 'border-border hover:border-accent/50'
-              }`}
             >
-              {renderEmoji(emoji)}
-            </button>
+              {renderEmoji}
+            </EmojiItem>
           ))}
         </div>
         <p className="text-sm text-text-secondary">
@@ -197,3 +193,32 @@ export const EmojiSection = () => {
     </div>
   )
 }
+
+const EmojiItem = memo(
+  ({
+    emoji,
+    isSelected,
+    toggleEmoji,
+    children,
+  }: {
+    emoji: string
+    isSelected: boolean
+    toggleEmoji: (emoji: string) => void
+    children: (emoji: string) => React.ReactNode
+  }) => {
+    return (
+      <button
+        type="button"
+        key={emoji}
+        onClick={() => toggleEmoji(emoji)}
+        className={`text-2xl size-16 flex items-center justify-center rounded-lg border-2 transition-colors ${
+          isSelected
+            ? 'border-accent bg-accent/10'
+            : 'border-border hover:border-accent/50'
+        }`}
+      >
+        {children(emoji)}
+      </button>
+    )
+  },
+)

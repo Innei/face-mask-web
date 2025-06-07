@@ -121,7 +121,7 @@ export const ImagePreview = () => {
 
     const link = document.createElement('a')
     link.href = processedImage
-    link.download = `emoji-face-${Date.now()}.png`
+    link.download = `emoji-face-${Date.now()}.jpeg`
     document.body.append(link)
     link.click()
     link.remove()
@@ -216,14 +216,7 @@ export const ImagePreview = () => {
             {isProcessing ? '处理中...' : '生成 Emoji 头像'}
           </Button>
 
-          {processedImage && (
-            <Button
-              onClick={downloadImage}
-              className="bg-primary hover:bg-primary/90"
-            >
-              下载图片
-            </Button>
-          )}
+          {processedImage && <Button onClick={downloadImage}>下载图片</Button>}
         </div>
 
         {faceDetections.length > 0 && (

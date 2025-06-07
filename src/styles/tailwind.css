@@ -68,6 +68,9 @@ body {
 
 /* Theme configuration */
 @theme {
+  --font-sans:
+    'Geist Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   /* Container */
   --container-padding: 2rem;
   --container-max-width-2xl: 1400px;
@@ -184,7 +187,7 @@ html body {
   font-family: 'Geist Sans';
   src: url('../assets/fonts/GeistVF.woff2') format('woff2');
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 100 200 300 400 500 600 700 800 900;
 }
 
 body {
