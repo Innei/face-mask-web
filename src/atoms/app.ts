@@ -1,4 +1,5 @@
 import { atom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
 
 import type { FaceDetectionConfig } from '~/lib/faceDetection'
 import { DEFAULT_FACE_DETECTION_CONFIG } from '~/lib/faceDetection'
@@ -11,16 +12,26 @@ export const isProcessingAtom = atom(false)
 export const isDragOverAtom = atom(false)
 
 // 人脸检测相关状态
-export const faceDetectionsAtom = atom<FaceDetection[]>([])
-export const faceDetectionConfigAtom = atom<FaceDetectionConfig>(
+export const faceDetectionsAtom = atomWithStorage<FaceDetection[]>(
+  'faceDetections',
+  [],
+)
+export const faceDetectionConfigAtom = atomWithStorage<FaceDetectionConfig>(
+  'faceDetectionConfig',
   DEFAULT_FACE_DETECTION_CONFIG,
 )
 
 // Emoji 相关状态
-export const selectedEmojisAtom = atom<string[]>([])
-export const customEmojiInputAtom = atom('')
-export const customEmojisAtom = atom<string[]>([])
-export const useRandomSelectionAtom = atom(true)
+export const selectedEmojisAtom = atomWithStorage<string[]>(
+  'selectedEmojis',
+  [],
+)
+export const customEmojiInputAtom = atomWithStorage('customEmojiInput', '')
+export const customEmojisAtom = atomWithStorage<string[]>('customEmojis', [])
+export const useRandomSelectionAtom = atomWithStorage(
+  'useRandomSelection',
+  true,
+)
 
 // 派生状态
 export const hasSelectedImageAtom = atom(

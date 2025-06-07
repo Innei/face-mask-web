@@ -4,7 +4,7 @@
 @plugin "tailwind-scrollbar";
 @plugin 'tailwindcss-animate';
 @plugin 'tailwindcss-safe-area';
-
+@import '@lobehub/webfont-harmony-sans/css/index.css';
 @import 'tailwindcss-uikit-colors/v4/macos.css';
 
 @source "./src/**/*.{js,jsx,ts,tsx}";
@@ -68,9 +68,6 @@ body {
 
 /* Theme configuration */
 @theme {
-  --font-sans:
-    'Geist Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   /* Container */
   --container-padding: 2rem;
   --container-max-width-2xl: 1400px;
@@ -132,14 +129,10 @@ body {
   --text-caption: 0.625rem;
   --text-caption--line-height: 0.8125rem;
 
-  /* Font families */
-  --font-family-sans: 'Geist Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-family-serif:
-    'Noto Serif CJK SC', 'Noto Serif SC', var(--font-serif),
-    'Source Han Serif SC', 'Source Han Serif', source-han-serif-sc, SongTi SC,
-    SimSum, 'Hiragino Sans GB', system-ui, -apple-system, Segoe UI, Roboto,
-    Helvetica, 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
-  --font-family-mono:
+  --font-sans:
+    'HarmonyOS Sans', 'Geist Sans', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono:
     'OperatorMonoSSmLig Nerd Font', 'Cascadia Code PL',
     'FantasqueSansMono Nerd Font', 'operator mono', JetBrainsMono,
     'Fira code Retina', 'Fira code', Consolas, Monaco, 'Hannotate SC',
@@ -181,13 +174,6 @@ html body {
 
 *:not(input):not(textarea):not([contenteditable='true']):focus-visible {
   outline: 0 !important;
-}
-
-@font-face {
-  font-family: 'Geist Sans';
-  src: url('../assets/fonts/GeistVF.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 100 200 300 400 500 600 700 800 900;
 }
 
 body {
