@@ -1,0 +1,26 @@
+import type { FC } from 'react'
+import { Outlet } from 'react-router'
+
+import { StarsBackground } from './components/ui/background'
+import { RootProviders } from './providers/root-providers'
+
+export const App: FC = () => {
+  return (
+    <RootProviders>
+      <StarsBackground className="fixed inset-0" />
+      <div className="relative z-[1]">
+        <AppLayer />
+      </div>
+    </RootProviders>
+  )
+}
+
+const AppLayer = () => {
+  const appIsReady = true
+  return appIsReady ? <Outlet /> : <AppSkeleton />
+}
+
+const AppSkeleton = () => {
+  return null
+}
+export default App
