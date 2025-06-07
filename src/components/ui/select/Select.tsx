@@ -28,7 +28,7 @@ const SelectTrigger = ({
     className={clsxm(
       'flex w-full items-center justify-between whitespace-nowrap rounded-lg bg-transparent',
       focusRing,
-      'outline-none transition-all duration-200 focus-within:outline-transparent focus-within:ring-2',
+      'outline-none transition-all duration-200',
       'border-border hover:border-fill border',
       size === 'sm' ? 'h-8 px-3 text-sm' : 'h-9 px-3.5 py-2 text-sm',
       'placeholder:text-text-secondary',
@@ -42,7 +42,7 @@ const SelectTrigger = ({
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <i className="i-mingcute-down-line -mr-1 ml-2 size-4 shrink-0 opacity-60 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+      <i className="i-mingcute-down-line -mr-1 ml-2 text-text-secondary size-4 shrink-0 opacity-60 transition-transform duration-200 group-data-[state=open]:rotate-180" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 )
@@ -106,9 +106,8 @@ const SelectContent = ({
     <SelectPrimitive.Content
       ref={ref}
       className={clsxm(
-        'bg-material-medium backdrop-blur-background text-text z-[60] max-h-96 min-w-32 overflow-hidden rounded-[6px] border p-1',
+        'bg-material-medium backdrop-blur-background text-text z-[60] max-h-96 min-w-32 overflow-hidden rounded-[6px] border border-border p-1',
         'shadow-context-menu',
-        'motion-scale-in-75 motion-duration-150 text-body lg:animate-none',
         className,
       )}
       position={position}
@@ -166,8 +165,8 @@ const SelectItem = ({
   <SelectPrimitive.Item
     ref={ref}
     className={clsxm(
-      'cursor-menu focus:bg-theme-selection-active focus:text-theme-selection-foreground relative flex select-none items-center rounded-[5px] px-2.5 py-1 outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      'data-[highlighted]:bg-theme-selection-hover focus-within:outline-transparent',
+      'cursor-menu focus:bg-accent focus:text-accent-foreground relative flex select-none items-center rounded-[5px] px-2.5 py-1 outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'data-[highlighted]:bg-accent text-sm focus-within:outline-transparent',
       'h-[28px] w-full',
       inset && 'pl-8',
       className,

@@ -1,6 +1,12 @@
 import { useAtom } from 'jotai'
+import { isValidElement } from 'react'
 
 import { faceDetectionConfigAtom, useRandomSelectionAtom } from '~/atoms/app'
+import { clsxm } from '~/lib/cn'
+
+import { Checkbox } from './ui/checkbox'
+import { ResponsiveSelect } from './ui/select/ResponsiveSelect'
+import { Slider } from './ui/slider'
 
 export const ConfigForm = () => {
   const [faceDetectionConfig, setFaceDetectionConfig] = useAtom(
@@ -15,76 +21,66 @@ export const ConfigForm = () => {
       <h3 className="text-lg font-semibold text-foreground">检测配置</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            输入尺寸 (Input Size)
-          </label>
-          <select
-            value={faceDetectionConfig.inputSize}
-            onChange={(e) =>
+        <FormItem label="输入尺寸 (Input Size)">
+          <ResponsiveSelect
+            value={faceDetectionConfig.inputSize.toString()}
+            onValueChange={(value) =>
               setFaceDetectionConfig((prev) => ({
                 ...prev,
-                inputSize: Number(e.target.value),
+                inputSize: Number(value),
               }))
             }
-            className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            <option value={320}>320 (快速)</option>
-            <option value={416}>416 (平衡)</option>
-            <option value={512}>512 (精确)</option>
-            <option value={608}>608 (最精确)</option>
-          </select>
-        </div>
+            items={[
+              { label: '320 (快速)', value: '320' },
+              { label: '416 (平衡)', value: '416' },
+              { label: '512 (精确)', value: '512' },
+              { label: '608 (最精确)', value: '608' },
+            ]}
+          />
+        </FormItem>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            置信度阈值 (Score Threshold)
-          </label>
-          <input
-            type="range"
-            min="0.1"
-            max="0.9"
-            step="0.1"
-            value={faceDetectionConfig.scoreThreshold}
-            onChange={(e) =>
+        <FormItem label="置信度阈值 (Score Threshold)">
+          <Slider
+            min={0.1}
+            max={0.9}
+            step={0.1}
+            value={[faceDetectionConfig.scoreThreshold]}
+            onValueChange={(value) =>
               setFaceDetectionConfig((prev) => ({
                 ...prev,
-                scoreThreshold: Number(e.target.value),
+                scoreThreshold: value[0],
               }))
             }
-            className="w-full accent-primary"
+            className="w-full h-8"
           />
           <div className="text-sm text-muted-foreground text-center">
             {faceDetectionConfig.scoreThreshold}
           </div>
-        </div>
+        </FormItem>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            最大检测数量
-          </label>
-          <input
-            type="number"
-            min="1"
-            max="20"
-            value={faceDetectionConfig.maxResults || 10}
-            onChange={(e) =>
+        <FormItem label="最大检测数量">
+          <Slider
+            min={1}
+            max={20}
+            value={[faceDetectionConfig.maxResults || 10]}
+            onValueChange={(value) =>
               setFaceDetectionConfig((prev) => ({
                 ...prev,
-                maxResults: Number(e.target.value),
+                maxResults: value[0],
               }))
             }
-            className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full h-8"
           />
-        </div>
+        </FormItem>
       </div>
 
       <div className="flex items-center space-x-2">
-        <input
-          type="checkbox"
+        <Checkbox
           id="random-selection"
           checked={useRandomSelection}
-          onChange={(e) => setUseRandomSelection(e.target.checked)}
+          onCheckedChange={(checked) =>
+            setUseRandomSelection(checked === 'indeterminate' ? false : checked)
+          }
           className="rounded border-input"
         />
         <label
@@ -94,6 +90,43 @@ export const ConfigForm = () => {
           自动随机选择 emoji（检测到人脸后自动选择对应数量的 emoji）
         </label>
       </div>
+    </div>
+  )
+}
+
+const FormItem = ({
+  children,
+  label,
+}: {
+  children: React.ReactNode
+  label: string
+}) => {
+  let labelShouldMarginLeft = false
+
+  if (
+    typeof children === 'object' &&
+    children &&
+    isValidElement(children) &&
+    'props' in children
+  ) {
+    switch (children.type) {
+      case ResponsiveSelect: {
+        labelShouldMarginLeft = true
+        break
+      }
+    }
+  }
+  return (
+    <div className="flex flex-col gap-2">
+      <label
+        className={clsxm(
+          'text-sm font-medium text-foreground',
+          labelShouldMarginLeft && 'pl-3',
+        )}
+      >
+        {label}
+      </label>
+      <div className="flex items-center gap-2">{children}</div>
     </div>
   )
 }

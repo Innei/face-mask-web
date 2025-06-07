@@ -18,7 +18,7 @@ const inputStyles = tv({
     // placeholder color
     'placeholder-gray-400 dark:placeholder-gray-500',
     // background color
-    'bg-white dark:bg-gray-950',
+    'bg-background',
     // disabled
     'disabled:border-gray-300 disabled:bg-gray-100 disabled:text-gray-400',
     'dark:disabled:border-gray-700 dark:disabled:bg-gray-800 dark:disabled:text-gray-500',

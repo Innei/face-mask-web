@@ -6,7 +6,7 @@ import { ImageUpload } from '~/components/ImageUpload'
 export const Component = () => {
   return (
     <div className="min-h-screen p-4">
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-6 mt-8">
         {/* 标题 */}
         <div className="text-center py-8">
           <h1 className="text-4xl font-bold text-foreground mb-2">

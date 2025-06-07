@@ -17,6 +17,8 @@ import {
   parseCustomEmojis,
 } from '~/lib/emojiUtils'
 
+import { Input } from './ui/input'
+
 export const EmojiSection = () => {
   const [selectedEmojis, setSelectedEmojis] = useAtom(selectedEmojisAtom)
   const [customEmojiInput, setCustomEmojiInput] = useAtom(customEmojiInputAtom)
@@ -81,7 +83,9 @@ export const EmojiSection = () => {
       ext: '.svg',
       base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/',
     })
-    return <span dangerouslySetInnerHTML={{ __html: parsed }} />
+    return (
+      <span dangerouslySetInnerHTML={{ __html: parsed }} className="size-12" />
+    )
   }, [])
 
   if (faceDetections.length === 0) {
@@ -101,12 +105,11 @@ export const EmojiSection = () => {
               输入自定义 emoji（用空格或逗号分隔）
             </label>
             <div className="flex gap-2">
-              <input
+              <Input
                 type="text"
                 value={customEmojiInput}
                 onChange={(e) => setCustomEmojiInput(e.target.value)}
                 placeholder="例如: 🎭 🎪 🎨 🎯"
-                className="flex-1 px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               />
               <Button
                 onClick={handleCustomEmojiSubmit}
@@ -175,17 +178,17 @@ export const EmojiSection = () => {
               type="button"
               key={emoji}
               onClick={() => toggleEmoji(emoji)}
-              className={`text-2xl p-2 rounded-lg border-2 transition-colors ${
+              className={`text-2xl size-16 flex items-center justify-center rounded-lg border-2 transition-colors ${
                 selectedEmojis.includes(emoji)
-                  ? 'border-primary bg-primary/10'
-                  : 'border-border hover:border-muted-foreground'
+                  ? 'border-accent bg-accent/10'
+                  : 'border-border hover:border-accent/50'
               }`}
             >
               {renderEmoji(emoji)}
             </button>
           ))}
         </div>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-text-secondary">
           {useRandomSelection
             ? '已启用自动随机选择，检测到人脸后会自动选择对应数量的 emoji'
             : '点击选择多个 Emoji，将按顺序应用到检测到的人脸上'}
