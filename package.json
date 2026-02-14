@@ -60,7 +60,7 @@
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react": "^4.5.1",
     "autoprefixer": "10.4.21",
-    "code-inspector-plugin": "0.20.12",
+    "code-inspector-plugin": "0.20.17",
     "eslint": "9.28.0",
     "eslint-config-hyoban": "4.0.8",
     "lint-staged": "16.1.0",
