@@ -55,7 +55,7 @@
     "@tailwindcss/postcss": "4.1.8",
     "@tailwindcss/typography": "0.5.16",
     "@tailwindcss/vite": "4.1.8",
-    "@types/node": "22.15.30",
+    "@types/node": "22.20.0",
     "@types/react": "19.1.6",
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react": "^4.5.1",
